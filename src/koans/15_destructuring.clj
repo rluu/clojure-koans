@@ -44,4 +44,22 @@
 
   "All together now!"
   (= "Test Testerson, 123 Test Lane, Testerville, TX"
-     (__ ["Test" "Testerson"] test-address)))
+     (let [v ["Test" "Testerson"]
+           {:keys [street-address city state]} test-address]
+       (apply str (interpose ", " [
+                                   
+                             (str (first v) " " (last v))
+                             street-address
+                             city
+                             state
+                             ]))
+       ))
+
+
+  "All together now!"
+  (= "Test Testerson, 123 Test Lane, Testerville, TX"
+     (let [v ["Test" "Testerson"]
+           m test-address]
+       (str (first v) " " (last v) ", " (:street-address m) ", " (:city m) ", " (:state m))
+        ))  
+)
